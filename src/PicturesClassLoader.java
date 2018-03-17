@@ -22,7 +22,6 @@ public class PicturesClassLoader extends ClassLoader {
 			image = (Image) method.invoke(object, arg);
 		} catch (ClassNotFoundException | IllegalAccessException | IllegalArgumentException | InstantiationException
 				| NoSuchMethodException | SecurityException | InvocationTargetException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		return image;
