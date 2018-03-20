@@ -15,18 +15,15 @@ import javax.imageio.ImageIO;
 import javax.swing.GrayFilter;
 
 
-public class BlurryPic {
+public class BlurryPic extends PictureManager {
 
-	public Image blurryPic(String imagePath) {
-		BufferedImage bufferedImg =null;
+	public BlurryPic(String imagePath) {
+		super(imagePath);
+	}
+
+	public Image blurryPic() {
 		BufferedImage blurredImg = null;
 		
-		try {
-			bufferedImg = ImageIO.read(new File(imagePath));
-		}catch(IOException e)
-		{
-			e.printStackTrace();
-		}
 		float[] matrix = new float[100];
 		for (int i = 0; i < 100; i++)
 			matrix[i] = 1.0f/100.0f;

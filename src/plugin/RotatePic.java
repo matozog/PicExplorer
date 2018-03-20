@@ -9,22 +9,21 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class RotatePic {
+public class RotatePic extends PictureManager {
 
-	double radians = 3.1415;
-	public Image rotatePic(String imagePath) {
-		BufferedImage inImg = null;
+	
+	public RotatePic(String imagePath)
+	{
+		super(imagePath);
+	}
 
-		try {
-			inImg = ImageIO.read(new File(imagePath));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	public Image rotatePic() {
+
 		AffineTransform transform = new AffineTransform();
-		transform.rotate(radians, inImg.getWidth() / 2, inImg.getHeight() / 2);
+		transform.rotate(radians, bufferedImg.getWidth() / 2, bufferedImg.getHeight() / 2);
 		AffineTransformOp op = new AffineTransformOp(transform, AffineTransformOp.TYPE_BILINEAR);
-		inImg = op.filter(inImg, null);
+		bufferedImg = op.filter(bufferedImg, null);
 
-		return inImg;
+		return bufferedImg;
 	}
 }

@@ -8,20 +8,14 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class NegativePic {
+public class NegativePic extends PictureManager {
 
 	
-	public Image negativePic(String imagePath) {
-		BufferedImage bufferedImg = null;
-		File fileIn = null;
-		File fileOut = null;
-		
-		try {
-			bufferedImg = ImageIO.read(new File(imagePath));
-		}catch(IOException e)
-		{
-			e.printStackTrace();
-		}
+	public NegativePic(String imagePath) {
+		super(imagePath);
+	}
+
+	public Image negativePic() {
 		
 		for(int i=0; i<bufferedImg.getHeight();i++)
 		{
