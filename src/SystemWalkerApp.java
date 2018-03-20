@@ -89,32 +89,16 @@ public class SystemWalkerApp implements TreeSelectionListener, TreeWillExpandLis
 		scrollTree.setViewportView(tree);
 		panelJTree.add(scrollTree);
 		
-		
-		
-		
-		
 		panelMiniatures = new JPanel();
-//		panelMiniatures.setSize(new Dimension(201, 421));
 		panelMiniatures.setPreferredSize(new Dimension(201,50));
-		//panelMiniatures.setBounds(261, 13, 201, 421);
 		panelMiniatures.setLayout(null);
-		//panelMiniatures.setBorder(BorderFactory.createTitledBorder(""));
 
-		//panelMiniatures.setBounds(261, 13, 201, 421);
 		scrollMiniature = new JScrollPane();    
 		scrollMiniature.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollMiniature.setBounds(261, 13, 201, 421);
 		scrollMiniature.setBorder(BorderFactory.createTitledBorder("Miniatures"));
-		//scrollMiniature.setHorizontalScrollBarPolicy(ScrollPane.SCROLLBARS_NEVER);
-		//scrollMiniature.setPreferredScroable
 		scrollMiniature.setViewportView(panelMiniatures);
-		//scrollMiniature.setBorder(BorderLayout.CENTER);
-		//panelMiniatures.add(scrollMiniature,BorderLayout.CENTER);
 		frame.getContentPane().add(scrollMiniature, BorderLayout.CENTER);
-		
-		
-		
-		
 		
 		rdbtnNormal = new JRadioButton("Normal");
 		rdbtnNormal.setSelected(true);

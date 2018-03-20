@@ -37,13 +37,5 @@ public class NegativePic {
 		}
 		
 		return bufferedImg;
-		/*try {
-			fileOut = new File("C:\\Users\\Mateusz\\workspace\\System-walker\\convertedImg\\" + fileIn.getName());
-			System.out.println("C:\\Users\\Mateusz\\workspace\\System-walker\\convertedImg\\" + fileIn.getName());
-			ImageIO.write(bufferedImg, "jpg", fileOut);
-		}catch(IOException e)
-		{
-			e.printStackTrace();
-		}*/
 	}
 }

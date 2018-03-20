@@ -31,19 +31,15 @@ public class RepainterPanel extends Thread implements MouseListener {
 	private ImagePanel panelImage;
 	private File[] filesList;
 	private boolean paint;
-	private ArrayList<JLabel> listOfLabels;
-	private ArrayList<Image> listOfImages;
 	private WeakHashMap<File, JLabel> hashMap = new WeakHashMap<File, JLabel>();
 	private JScrollPane scroll;
 	private int numberOfPicture = -1;
 	private Image img;
-	private InputStream inputStream;
+	private ImageIcon imgIcon;
 
 	public RepainterPanel(JPanel panelIcon, ImagePanel panelImage, JScrollPane scroll) {
 		this.panelIcon = panelIcon;
 		this.panelImage = panelImage;
-		listOfLabels = new ArrayList<JLabel>();
-		listOfImages = new ArrayList<Image>();
 		this.scroll = scroll;
 	}
 
@@ -52,8 +48,6 @@ public class RepainterPanel extends Thread implements MouseListener {
 		int h = 0, w = 0;
 		while (true) {
 			if (paint) {
-				// listOfImages.clear();
-				//listOfLabels.clear();
 				hashMap.clear();
 				numberOfPicture = -1;
 				h = 0;
@@ -61,36 +55,27 @@ public class RepainterPanel extends Thread implements MouseListener {
 				panelIcon.removeAll();
 				panelIcon.setPreferredSize(new Dimension(201, 50));
 				for (int i = 0; i < filesList.length; i++) {
-					if (i % 3 == 0 && i != 0) {
+					if (i % 3 == 0 && i != 0) 
+					{
 						w = 0;
 						h++;
 						panelIcon.setPreferredSize(new Dimension(panelIcon.getWidth(), (h + 1) * 58));
 					}
-					try {
-						// WeakReference<Image> wr1 = new WeakReference<Image>(ImageIO.read(new
-						// FileInputStream(filesList[i].getAbsolutePath())));
-						// Image img = (Image) wr1.get();
-						inputStream = new BufferedInputStream(new FileInputStream(filesList[i].getAbsolutePath()));
-						img = ImageIO.read(inputStream).getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-						// img = img.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-						//WeakReference wr = new WeakReference(new JLabel());
-						JLabel label = new JLabel();//(JLabel) wr.get();
-						label.setBounds(5 + w, 50 * h + 8 * h, 50, 50);
-						label.setIcon(new ImageIcon(img));
-						label.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
-						label.addMouseListener(this);
-						hashMap.put(filesList[i],label);
-						//listOfLabels.add(label);
-						// listOfImages.add(img);
-						panelIcon.add(label);
-						panelIcon.repaint();
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
+					imgIcon = new ImageIcon(filesList[i].getAbsolutePath());
+					img = imgIcon.getImage();
+					img = img.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+					
+					JLabel label = new JLabel();
+					label.setBounds(5 + w, 50 * h + 8 * h, 50, 50);
+					label.setIcon(new ImageIcon(img));
+					label.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+					label.addMouseListener(this);
+					hashMap.put(filesList[i], label);
+					panelIcon.add(label);
+					panelIcon.repaint();
+					scroll.setViewportView(panelIcon);
 					w += 55;
-					System.gc();
 				}
-				scroll.setViewportView(panelIcon);
 				paint = false;
 			}
 			try {
@@ -127,8 +112,7 @@ public class RepainterPanel extends Thread implements MouseListener {
 				panelImage.setSelectionOnNorm();
 				panelImage.repaint();
 				numberOfPicture = i;
-			} 
-			else
+			} else
 				hashMap.get(filesList[i]).setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
 		}
 	}
@@ -149,12 +133,6 @@ public class RepainterPanel extends Thread implements MouseListener {
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
 
-	}
-
-	public ImageIcon scaleImage(Image img, int width, int height) {
-		Image scaleImg = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-		ImageIcon imgIcon = new ImageIcon(scaleImg);
-		return imgIcon;
 	}
 
 	public boolean getPaint() {
