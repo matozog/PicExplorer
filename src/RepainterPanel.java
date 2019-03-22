@@ -55,8 +55,7 @@ public class RepainterPanel extends Thread implements MouseListener {
 				panelIcon.removeAll();
 				panelIcon.setPreferredSize(new Dimension(201, 50));
 				for (int i = 0; i < filesList.length; i++) {
-					if (i % 3 == 0 && i != 0) 
-					{
+					if (i % 3 == 0 && i != 0) {
 						w = 0;
 						h++;
 						panelIcon.setPreferredSize(new Dimension(panelIcon.getWidth(), (h + 1) * 58));
@@ -64,7 +63,7 @@ public class RepainterPanel extends Thread implements MouseListener {
 					imgIcon = new ImageIcon(filesList[i].getAbsolutePath());
 					img = imgIcon.getImage();
 					img = img.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-					
+
 					JLabel label = new JLabel();
 					label.setBounds(5 + w, 50 * h + 8 * h, 50, 50);
 					label.setIcon(new ImageIcon(img));
@@ -97,23 +96,26 @@ public class RepainterPanel extends Thread implements MouseListener {
 		Object z = e.getSource();
 
 		for (int i = 0; i < hashMap.size(); i++) {
-			if (z == hashMap.get(filesList[i])) {
-				hashMap.get(filesList[i]).setBorder(BorderFactory.createLineBorder(Color.RED, 1));
-				panelImage.removeAll();
-				try {
-					panelImage.setImage(ImageIO.read(new FileInputStream(filesList[i].getAbsolutePath())));
-				} catch (FileNotFoundException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				panelImage.setSelectionOnNorm();
-				panelImage.repaint();
-				numberOfPicture = i;
-			} else
-				hashMap.get(filesList[i]).setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+			if (hashMap.get(filesList[i])!=null) {
+				if (z == hashMap.get(filesList[i])) {
+					hashMap.get(filesList[i]).setBorder(BorderFactory.createLineBorder(Color.RED, 1));
+					panelImage.removeAll();
+					try {
+						panelImage.setImage(ImageIO.read(new FileInputStream(filesList[i].getAbsolutePath())));
+					} catch (FileNotFoundException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					panelImage.setSelectionOnNorm();
+					panelImage.repaint();
+					numberOfPicture = i;
+				} else
+					hashMap.get(filesList[i]).setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+			}
+			else paint = true;
 		}
 	}
 

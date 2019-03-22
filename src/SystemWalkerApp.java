@@ -36,6 +36,9 @@ import edu.stanford.nlp.trees.tregex.gui.FileTreeNode;
 import javax.swing.JRadioButton;
 import javax.swing.JButton;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.JToggleButton;
+import javax.swing.JSpinner;
+import javax.swing.JSlider;
 
 public class SystemWalkerApp implements TreeSelectionListener, TreeWillExpandListener, ActionListener {
 
